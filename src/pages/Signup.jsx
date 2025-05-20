@@ -1,4 +1,4 @@
-import { AppContext } from "../components/AppContext.js";
+import { AppContext } from "../components/AppContext.jsx";
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../http/userAPI.js";

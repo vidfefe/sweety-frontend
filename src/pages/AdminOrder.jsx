@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { adminGetOne as getOneOrder } from "../http/orderAPI.js";
-import { Container, Spinner } from "react-bootstrap";
-import Order from "../components/Order.js";
+import Order from "../components/Order.jsx";
 import { useParams } from "react-router-dom";
 
 const AdminOrder = () => {

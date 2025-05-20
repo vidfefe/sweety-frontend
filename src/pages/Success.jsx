@@ -2,7 +2,7 @@ import { Typography, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { userCreate, guestCreate } from "../http/orderAPI.js";
-import { AppContext } from "../components/AppContext.js";
+import { AppContext } from "../components/AppContext.jsx";
 import { useSearchParams } from "react-router-dom";
 
 export default function Success() {
@@ -30,7 +30,7 @@ export default function Success() {
         setOrderId(order.id);
 
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}payment/status/${sessionId}?orderId=${order.id}`,
+          `${import.meta.env.REACT_APP_API_URL}payment/status/${sessionId}?orderId=${order.id}`,
         );
         const data = await response.json();
 

@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const guestInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: import.meta.env.VITE_APP_API_URL,
   withCredentials: true,
 });
 
 const authInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: import.meta.env.VITE_APP_API_URL,
   withCredentials: true,
 });
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchBrands, deleteBrand } from "../http/catalogAPI.js";
-import EditBrand from "../components/EditBrand.js";
-import Loader from "../components/Loader.js";
+import EditBrand from "../components/EditBrand.jsx";
+import Loader from "../components/Loader.jsx";
 import { Delete, AddOutlined, EditOutlined } from "@mui/icons-material";
 import {
   Box,

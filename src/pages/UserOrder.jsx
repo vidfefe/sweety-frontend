@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { userGetOne as getOneOrder } from "../http/orderAPI.js";
-import Order from "../components/Order.js";
+import Order from "../components/Order.jsx";
 import { useParams } from "react-router-dom";
-import Loader from "../components/Loader.js";
+import Loader from "../components/Loader.jsx";
 import { Typography } from "@mui/material";
 
 const UserOrder = () => {

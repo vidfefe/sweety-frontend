@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchCategories, deleteCategory } from "../http/catalogAPI.js";
-import EditCategory from "../components/EditCategory.js";
-import Loader from "../components/Loader.js";
+import EditCategory from "../components/EditCategory.jsx";
+import Loader from "../components/Loader.jsx";
 import { Delete, AddOutlined, EditOutlined } from "@mui/icons-material";
 import {
   Box,

@@ -4,11 +4,11 @@ class CatalogStore {
   _categories = [];
   _brands = [];
   _products = [];
-  _category = null; // выбранная категория
-  _brand = null; // выбранный бренд
-  _page = 1; // текущая страница
-  _count = 0; // сколько всего товаров
-  _limit = 8; // товаров на страницу
+  _category = null;
+  _brand = null;
+  _page = 1;
+  _count = 0;
+  _limit = 8;
 
   constructor() {
     makeAutoObservable(this);
@@ -47,7 +47,6 @@ class CatalogStore {
   }
 
   get pages() {
-    // всего страниц
     return Math.ceil(this.count / this.limit);
   }
 

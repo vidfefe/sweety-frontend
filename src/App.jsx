@@ -1,13 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./components/AppRouter.js";
-import NavBar from "./components/NavBar.js";
-import "bootstrap/dist/css/bootstrap.min.css";
+import AppRouter from "./components/AppRouter.jsx";
+import NavBar from "./components/NavBar.jsx";
 import "./index.scss";
-import { AppContext } from "./components/AppContext.js";
+import { AppContext } from "./components/AppContext.jsx";
 import { check as checkAuth } from "./http/userAPI.js";
 import { useState, useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import Loader from "./components/Loader.js";
+import Loader from "./components/Loader.jsx";
 import { fetchBasket } from "./http/basketAPI.js";
 import axios from "axios";
 import { Container, Divider } from "@mui/material";
@@ -20,6 +19,8 @@ const App = observer(() => {
     Promise.all([checkAuth(), fetchBasket()])
       .then(
         axios.spread((userData, basketData) => {
+          console.log(userData);
+          console.log(basketData);
           if (userData) {
             user.login(userData);
           }

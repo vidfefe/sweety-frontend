@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "./AppContext.jsx";
 import { observer } from "mobx-react-lite";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import {

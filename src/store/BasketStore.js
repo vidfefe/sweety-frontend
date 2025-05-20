@@ -8,11 +8,13 @@ class BasketStore {
   }
 
   get products() {
-    return this._products;
+    return this._products || [];
   }
 
   get count() {
-    return this._products.length;
+    return this._products && Array.isArray(this._products)
+      ? this._products.length
+      : 0;
   }
 
   get sum() {
@@ -23,7 +25,7 @@ class BasketStore {
   }
 
   set products(products) {
-    this._products = products;
+    this._products = products || [];
   }
 }
 

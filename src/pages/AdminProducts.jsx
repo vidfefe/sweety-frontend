@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchAllProducts, deleteProduct } from "../http/catalogAPI.js";
-import CreateProduct from "../components/CreateProduct.js";
-import UpdateProduct from "../components/UpdateProduct.js";
-import Loader from "../components/Loader.js";
+import CreateProduct from "../components/CreateProduct.jsx";
+import UpdateProduct from "../components/UpdateProduct.jsx";
+import Loader from "../components/Loader.jsx";
 import {
   Delete,
   AddOutlined,

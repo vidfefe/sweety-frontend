@@ -14,9 +14,9 @@ import {
   fetchBrands,
 } from "../http/catalogAPI.js";
 import { useState, useEffect } from "react";
-import CreateProperties from "./CreateProperties.js";
-import SelectBrand from "./SelectBrand.js";
-import SelectCategory from "./SelectCategory.js";
+import CreateProperties from "./CreateProperties.jsx";
+import SelectBrand from "./SelectBrand.jsx";
+import SelectCategory from "./SelectCategory.jsx";
 
 const defaultValue = { name: "", price: "", category: "", brand: "" };
 const defaultValid = { name: null, price: null, category: null, brand: null };

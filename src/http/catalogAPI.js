@@ -1,8 +1,5 @@
 import { guestInstance, authInstance } from "./index.js";
 
-/*
- * Создание, обновление и удаление категории, получение списка всех категорий
- */
 export const createCategory = async (category) => {
   const { data } = await authInstance.post("category/create", category);
   return data;

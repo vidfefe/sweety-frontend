@@ -1,7 +1,7 @@
 import { Grid2 } from "@mui/material";
-import ProductList from "../components/ProductList.js";
+import ProductList from "../components/ProductList.jsx";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../components/AppContext.js";
+import { AppContext } from "../components/AppContext.jsx";
 import {
   fetchCategories,
   fetchBrands,
@@ -9,8 +9,8 @@ import {
 } from "../http/catalogAPI.js";
 import { observer } from "mobx-react-lite";
 import { useLocation, useSearchParams } from "react-router-dom";
-import Loader from "../components/Loader.js";
-import FilterAccordion from "../components/FilterAccordion.js";
+import Loader from "../components/Loader.jsx";
+import FilterAccordion from "../components/FilterAccordion.jsx";
 
 const getSearchParams = (searchParams) => {
   let category = searchParams.get("category");

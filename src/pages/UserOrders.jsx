@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { userGetAll as getAllOrders } from "../http/orderAPI.js";
-import Orders from "../components/Orders.js";
-import Loader from "../components/Loader.js";
+import Orders from "../components/Orders.jsx";
+import Loader from "../components/Loader.jsx";
 import { Typography } from "@mui/material";
 
 const UserOrders = () => {

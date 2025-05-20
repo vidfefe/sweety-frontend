@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import BasketList from "../components/BasketList.js";
+import BasketList from "../components/BasketList.jsx";
 
 const Basket = () => {
   return (

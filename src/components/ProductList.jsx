@@ -1,6 +1,6 @@
-import ProductItem from "./ProductItem.js";
+import ProductItem from "./ProductItem.jsx";
 import { useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "./AppContext.jsx";
 import { observer } from "mobx-react-lite";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { Grid2, Pagination, PaginationItem, Typography } from "@mui/material";

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "../components/AppContext.js";
+import { AppContext } from "../components/AppContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../http/userAPI.js";
 

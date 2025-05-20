@@ -1,4 +1,3 @@
-import { Modal, Button } from "react-bootstrap";
 
 const CreateOrder = (props) => {
   const { show, setShow } = props;

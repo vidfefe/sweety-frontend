@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { adminGetAll as getAllOrders } from "../http/orderAPI.js";
-import { Button, Container, Spinner } from "react-bootstrap";
-import Orders from "../components/Orders.js";
-import CreateOrder from "../components/CreateOrder.js";
+import Orders from "../components/Orders.jsx";
+import CreateOrder from "../components/CreateOrder.jsx";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState(null);

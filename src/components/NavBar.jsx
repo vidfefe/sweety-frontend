@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "./AppContext.jsx";
 import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { logout } from "../http/userAPI.js";

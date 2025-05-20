@@ -1,19 +1,20 @@
 import { ListGroup } from "react-bootstrap";
 import { useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "./AppContext.jsx";
 import { observer } from "mobx-react-lite";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-const CategoryBar = observer(() => {
+const BrandBar = observer(() => {
   const { catalog } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleClick = (id) => {
-    if (id === catalog.category) {
-      catalog.category = null;
+    if (id === catalog.brand) {
+      catalog.brand = null;
     } else {
-      catalog.category = id;
+      catalog.brand = id;
     }
+
     const params = {};
     if (catalog.category) params.category = catalog.category;
     if (catalog.brand) params.brand = catalog.brand;
@@ -25,11 +26,11 @@ const CategoryBar = observer(() => {
   };
 
   return (
-    <ListGroup>
-      {catalog.categories.map((item) => (
+    <ListGroup horizontal>
+      {catalog.brands.map((item) => (
         <ListGroup.Item
           key={item.id}
-          active={item.id === catalog.category}
+          active={item.id === catalog.brand}
           onClick={() => handleClick(item.id)}
           style={{ cursor: "pointer" }}
         >
@@ -40,4 +41,4 @@ const CategoryBar = observer(() => {
   );
 });
 
-export default CategoryBar;
+export default BrandBar;

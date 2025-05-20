@@ -37,7 +37,6 @@ const theme = createTheme({
     MuiTable: {
       styleOverrides: {
         root: {
-          // borderCollapse: "collapse", // Убираем стандартное поведение с разделением ячеек
           boxShadow: "none",
           border: "none",
         },
@@ -59,13 +58,6 @@ const theme = createTheme({
         },
       },
     },
-    // MuiSvgIcon: {
-    //   styleOverrides: {
-    //     root: {
-    //       color: "#3D3D3D",
-    //     },
-    //   },
-    // },
     MuiButton: {
       styleOverrides: {
         root: {

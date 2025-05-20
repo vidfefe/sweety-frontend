@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "./AppContext.jsx";
 import { increment, decrement, remove } from "../http/basketAPI.js";
 import { Link, useNavigate } from "react-router-dom";
-import BasketItem from "./BasketItem.js";
+import BasketItem from "./BasketItem.jsx";
 import { observer } from "mobx-react-lite";
-import Loader from "./Loader.js";
+import Loader from "./Loader.jsx";
 
 import Grid from "@mui/material/Grid2";
 import {

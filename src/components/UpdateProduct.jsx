@@ -16,9 +16,9 @@ import {
 } from "../http/catalogAPI.js";
 import { useState, useEffect } from "react";
 import uuid from "react-uuid";
-import UpdateProperties from "./UpdateProperties.js";
-import SelectCategory from "./SelectCategory.js";
-import SelectBrand from "./SelectBrand.js";
+import UpdateProperties from "./UpdateProperties.jsx";
+import SelectCategory from "./SelectCategory.jsx";
+import SelectBrand from "./SelectBrand.jsx";
 import {
   createProperty,
   updateProperty,

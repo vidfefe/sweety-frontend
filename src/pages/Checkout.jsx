@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import { AppContext } from "../components/AppContext.js";
+import { AppContext } from "../components/AppContext.jsx";
 import { fetchBasket } from "../http/basketAPI.js";
 import { check as checkAuth } from "../http/userAPI.js";
 import { Navigate } from "react-router-dom";
-import Loader from "../components/Loader.js";
+import Loader from "../components/Loader.jsx";
 import { Typography, Box, TextField, Button, Container } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -115,7 +115,7 @@ const Checkout = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/payment/create-session`,
+        `${import.meta.env.REACT_APP_API_URL}/payment/create-session`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

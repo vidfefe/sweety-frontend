@@ -6,8 +6,8 @@ import {
 } from "../http/catalogAPI.js";
 import { useParams } from "react-router-dom";
 import { append } from "../http/basketAPI.js";
-import { AppContext } from "../components/AppContext.js";
-import Loader from "../components/Loader.js";
+import { AppContext } from "../components/AppContext.jsx";
+import Loader from "../components/Loader.jsx";
 import Grid from "@mui/material/Grid2";
 import {
   Typography,
