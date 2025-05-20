@@ -21,7 +21,7 @@ const BasketItem = ({
               maxHeight: 100,
               maxWidth: "100%",
             }}
-            src={process.env.REACT_APP_IMG_URL + image}
+            src={process.env.VITE_APP_IMG_URL + image}
             alt={name}
           />
         ) : (

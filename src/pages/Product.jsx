@@ -84,7 +84,7 @@ const Product = () => {
                 maxHeight: 300,
                 maxWidth: "100%",
               }}
-              src={process.env.REACT_APP_IMG_URL + product.image}
+              src={process.env.VITE_APP_IMG_URL + product.image}
               alt={product.name}
             />
           ) : (
