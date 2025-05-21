@@ -108,14 +108,13 @@ const Checkout = () => {
       address: value.address,
       comment: value.comment?.trim() || null,
     };
-    console.log(checkoutData);
 
     localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
 
     try {
       setLoading(true);
       const response = await fetch(
-        `${import.meta.env.REACT_APP_API_URL}/payment/create-session`,
+        `${import.meta.env.VITE_APP_API_URL}/payment/create-session`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -130,9 +129,7 @@ const Checkout = () => {
         return;
       }
 
-      const stripe = await loadStripe(
-        "pk_test_51QvEacDZZ5hOIJ4z7FoVXC1Tb5Gp4iYWJgHX1FoBRN2ZXkTjFLUN1hEmGbcJrGaT6M79Jo810xJVRMbguyqQ5JaT00GCqsa1Ks",
-      );
+      const stripe = await loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
       const { error } = await stripe.redirectToCheckout({ sessionId: data.id });
 
       if (error) {

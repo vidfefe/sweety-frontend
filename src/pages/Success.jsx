@@ -30,7 +30,7 @@ export default function Success() {
         setOrderId(order.id);
 
         const response = await fetch(
-          `${import.meta.env.REACT_APP_API_URL}payment/status/${sessionId}?orderId=${order.id}`,
+          `${import.meta.env.VITE_APP_API_URL}payment/status/${sessionId}?orderId=${order.id}`,
         );
         const data = await response.json();
 

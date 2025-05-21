@@ -9,7 +9,6 @@ export const signup = async (email, password) => {
       role: "USER",
     });
     const token = response.data.token;
-    console.log(response.data);
     const user = jwtDecode(token);
     localStorage.setItem("token", token);
     return user;

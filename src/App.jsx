@@ -19,8 +19,6 @@ const App = observer(() => {
     Promise.all([checkAuth(), fetchBasket()])
       .then(
         axios.spread((userData, basketData) => {
-          console.log(userData);
-          console.log(basketData);
           if (userData) {
             user.login(userData);
           }

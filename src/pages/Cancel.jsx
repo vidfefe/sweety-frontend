@@ -15,11 +15,11 @@ export default function Cancel() {
       <Typography>Вы можете попробовать снова</Typography>
       <Button
         component={Link}
-        to="/checkout"
+        to="/basket"
         variant="contained"
         sx={{ py: "10px" }}
       >
-        Повторить оплату
+        Повторить заказ
       </Button>
     </Box>
   );
