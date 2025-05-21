@@ -119,7 +119,7 @@ const AdminProducts = () => {
                     {item.image && (
                       <IconButton
                         component="a"
-                        href={process.env.VITE_APP_IMG_URL + item.image}
+                        href={item.image}
                         target="_blank"
                       >
                         <InsertPhotoOutlined />

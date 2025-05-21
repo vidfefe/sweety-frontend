@@ -13,7 +13,7 @@ const ProductItem = ({ data }) => {
           <CardMedia
             component="img"
             alt={data.name}
-            image={process.env.VITE_APP_IMG_URL + data.image}
+            image={data.image}
             sx={{ height: 200, objectFit: "contain" }}
           />
         ) : (
