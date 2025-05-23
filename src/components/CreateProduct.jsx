@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import CreateProperties from "./CreateProperties.jsx";
 import SelectBrand from "./SelectBrand.jsx";
 import SelectCategory from "./SelectCategory.jsx";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const defaultValue = { name: "", price: "", category: "", brand: "" };
 const defaultValid = { name: null, price: null, category: null, brand: null };
@@ -41,6 +42,7 @@ const CreateProduct = ({ show, setShow, setChange }) => {
   const [properties, setProperties] = useState([]);
   const [categories, setCategories] = useState(null);
   const [brands, setBrands] = useState(null);
+  const showToast = useToast();
 
   useEffect(() => {
     fetchCategories().then((data) => setCategories(data));
@@ -58,7 +60,7 @@ const CreateProduct = ({ show, setShow, setChange }) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // ✅ Исправлено: предотвращаем стандартное поведение формы
+    event.preventDefault();
 
     const correct = isValid(value);
     setValid(correct);
@@ -87,8 +89,12 @@ const CreateProduct = ({ show, setShow, setChange }) => {
           setImage(null);
           setShow(false);
           setChange((prev) => !prev);
+          showToast("Товар успешно добавлен", "success");
         })
-        .catch((error) => alert(error.response.data.message));
+        .catch((error) => {
+          console.error(error);
+          showToast("Ошибка при добавлении товара", "error");
+        });
     }
   };
 

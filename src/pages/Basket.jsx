@@ -4,7 +4,7 @@ import BasketList from "../components/BasketList.jsx";
 const Basket = () => {
   return (
     <>
-      <Typography variant="h4"> Корзина</Typography>
+      <Typography variant="h4">Корзина</Typography>
       <BasketList />
     </>
   );

@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader.jsx";
 import FilterAccordion from "../components/FilterAccordion.jsx";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const getSearchParams = (searchParams) => {
   let category = searchParams.get("category");
@@ -34,6 +35,7 @@ const Shop = observer(() => {
   const [categoriesFetching, setCategoriesFetching] = useState(true);
   const [brandsFetching, setBrandsFetching] = useState(true);
   const [productsFetching, setProductsFetching] = useState(true);
+  const showToast = useToast();
 
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -41,10 +43,12 @@ const Shop = observer(() => {
   useEffect(() => {
     fetchCategories()
       .then((data) => (catalog.categories = data))
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setCategoriesFetching(false));
 
     fetchBrands()
       .then((data) => (catalog.brands = data))
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setBrandsFetching(false));
 
     const { category, brand, page } = getSearchParams(searchParams);
@@ -62,6 +66,7 @@ const Shop = observer(() => {
         catalog.products = data.rows;
         catalog.count = data.count;
       })
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setProductsFetching(false));
   }, [catalog, searchParams]);
 
@@ -97,13 +102,14 @@ const Shop = observer(() => {
         catalog.products = data.rows;
         catalog.count = data.count;
       })
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setProductsFetching(false));
   }, [catalog.category, catalog.brand, catalog.page, catalog]);
 
   return (
     <>
       {categoriesFetching || brandsFetching || productsFetching ? (
-        <Loader></Loader>
+        <Loader />
       ) : (
         <Grid2 container mt={2} spacing={2}>
           <Grid2 size={{ md: 3 }}>

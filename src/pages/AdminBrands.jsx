@@ -14,6 +14,7 @@ import {
   TableRow,
   IconButton,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const AdminBrands = () => {
   const [brands, setBrands] = useState(null);
@@ -21,6 +22,7 @@ const AdminBrands = () => {
   const [show, setShow] = useState(false);
   const [change, setChange] = useState(false);
   const [brandId, setBrandId] = useState(0);
+  const showToast = useToast();
 
   const handleCreateClick = () => {
     setBrandId(0);
@@ -36,14 +38,15 @@ const AdminBrands = () => {
     deleteBrand(id)
       .then((data) => {
         setChange(!change);
-        alert(`Бренд «${data.name}» удален`);
+        showToast(`Бренд «${data.name}» удален`, "warning");
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) => showToast(error.response.data.message, "error"));
   };
 
   useEffect(() => {
     fetchBrands()
       .then((data) => setBrands(data))
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setFetching(false));
   }, [change]);
 
@@ -107,51 +110,6 @@ const AdminBrands = () => {
         </Typography>
       )}
     </Box>
-    // <Container>
-    //   <h3>Бренды</h3>
-    //   <Button onClick={() => handleCreateClick()}>Создать бренд</Button>
-    //   <EditBrand
-    //     id={brandId}
-    //     show={show}
-    //     setShow={setShow}
-    //     setChange={setChange}
-    //   />
-    //   {brands.length > 0 ? (
-    //     <Table bordered hover size="sm" className="mt-3">
-    //       <thead>
-    //         <tr>
-    //           <th>Название</th>
-    //           <th>Редактировать</th>
-    //           <th></th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {brands.map((item) => (
-    //           <tr key={item.id}>
-    //             <td>{item.name}</td>
-    //             <td>
-    //               <Button size="sm" onClick={() => handleUpdateClick(item.id)}>
-    //                 Редактировать
-    //               </Button>
-    //             </td>
-    //             <td>
-    //               <div
-    //                 className="button-delete cursor-pointer"
-    //                 onClick={() => handleDeleteClick(item.id)}
-    //               >
-    //                 <img src={deleteImg}></img>
-    //               </div>
-    //             </td>
-    //           </tr>
-    //         ))}
-    //       </tbody>
-    //     </Table>
-    //   ) : (
-    //     <p className="empty d-flex flex-column justify-content-center align-items-center ">
-    //       Список брендов пустой
-    //     </p>
-    //   )}
-    // </Container>
   );
 };
 

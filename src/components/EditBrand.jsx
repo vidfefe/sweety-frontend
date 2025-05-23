@@ -8,10 +8,12 @@ import {
 } from "@mui/material";
 import { createBrand, fetchBrand, updateBrand } from "../http/catalogAPI.js";
 import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const EditBrand = ({ id, show, setShow, setChange }) => {
   const [name, setName] = useState("");
   const [valid, setValid] = useState(null);
+  const showToast = useToast();
 
   useEffect(() => {
     if (id) {
@@ -20,7 +22,10 @@ const EditBrand = ({ id, show, setShow, setChange }) => {
           setName(data.name);
           setValid(data.name !== "");
         })
-        .catch((error) => alert(error.response.data.message));
+        .catch((error) => {
+          console.error(error.response.data.message);
+          showToast("Ошибка при загрузке бренда", "error");
+        });
     } else {
       setName("");
       setValid(null);
@@ -40,11 +45,18 @@ const EditBrand = ({ id, show, setShow, setChange }) => {
       const data = {
         name: name.trim(),
       };
-      const success = (data) => {
+      const success = () => {
         setShow(false);
         setChange((state) => !state);
+        showToast(`Бренд успешно ${id ? "обновлен" : "добавлен"}`, "success");
       };
-      const error = (error) => alert(error.response.data.message);
+      const error = (error) => {
+        showToast(
+          `Ошибка при ${id ? "обновлении" : "добавлении"} бренда`,
+          "error",
+        );
+        console.error(error.response.data.message);
+      };
       id
         ? updateBrand(id, data).then(success).catch(error)
         : createBrand(data).then(success).catch(error);

@@ -20,6 +20,8 @@ import {
   TableRow,
   IconButton,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
+
 const ADMIN_PER_PAGE = 12;
 
 const AdminProducts = () => {
@@ -29,11 +31,12 @@ const AdminProducts = () => {
   const [updateShow, setUpdateShow] = useState(false);
   const [change, setChange] = useState(false);
   const [product, setProduct] = useState(null);
+  const showToast = useToast();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const handlePageChange = (event, page) => {
+  const handlePageChange = (_, page) => {
     setCurrentPage(page);
     setFetching(true);
   };
@@ -55,9 +58,9 @@ const AdminProducts = () => {
         } else {
           setChange(!change);
         }
-        alert(`Товар «${data.name}» удален`);
+        showToast(`Товар «${data.name}» удален`, "warning");
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) => showToast(error.response.data.message, "error"));
   };
 
   useEffect(() => {
@@ -66,6 +69,7 @@ const AdminProducts = () => {
         setProducts(data.rows);
         setTotalPages(Math.ceil(data.count / ADMIN_PER_PAGE));
       })
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setFetching(false));
   }, [change, currentPage]);
 
@@ -126,8 +130,8 @@ const AdminProducts = () => {
                       </IconButton>
                     )}
                   </TableCell>
-                  <TableCell>{item.category?.name || "NULL"}</TableCell>
-                  <TableCell>{item.brand?.name || "NULL"}</TableCell>
+                  <TableCell>{item.category?.name || "Null"}</TableCell>
+                  <TableCell>{item.brand?.name || "Null"}</TableCell>
                   <TableCell>{item.price} BYN</TableCell>
                   <TableCell>
                     <IconButton

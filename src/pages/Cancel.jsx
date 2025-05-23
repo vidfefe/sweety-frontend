@@ -10,6 +10,7 @@ export default function Cancel() {
       justifyContent="center"
       alignItems="center"
       gap={1}
+      minHeight="85vh"
     >
       <Typography variant="h4">Оплата не прошла</Typography>
       <Typography>Вы можете попробовать снова</Typography>

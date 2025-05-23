@@ -4,12 +4,14 @@ import { useEffect, useState, useContext } from "react";
 import { userCreate, guestCreate } from "../http/orderAPI.js";
 import { AppContext } from "../components/AppContext.jsx";
 import { useSearchParams } from "react-router-dom";
+import { useToast } from "@/hooks/useToast.jsx";
 
 export default function Success() {
   const { user, basket } = useContext(AppContext);
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [orderId, setOrderId] = useState(null);
+  const showToast = useToast();
 
   useEffect(() => {
     if (!sessionId || basket.products.length === 0 || orderId) return;
@@ -18,7 +20,7 @@ export default function Success() {
       try {
         const checkoutData = JSON.parse(localStorage.getItem("checkoutData"));
         if (!checkoutData) {
-          alert("Данные оформления заказа не найдены");
+          showToast("Данные оформления заказа не найдены", "error");
           return;
         }
         const create = user.isAuth ? userCreate : guestCreate;
@@ -39,7 +41,8 @@ export default function Success() {
           localStorage.removeItem("checkoutData");
         }
       } catch (error) {
-        console.error("Ошибка при обработке заказа:", error);
+        console.error(error);
+        showToast("Ошибка при обработке заказа", "error");
       }
     };
 
@@ -54,6 +57,7 @@ export default function Success() {
       justifyContent="center"
       alignItems="center"
       gap={1}
+      minHeight="85vh"
     >
       <Typography variant="h4">Оплата прошла успешна</Typography>
       <Typography>Спасибо за покупку!</Typography>

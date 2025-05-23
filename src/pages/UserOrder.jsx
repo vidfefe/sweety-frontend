@@ -4,17 +4,23 @@ import Order from "../components/Order.jsx";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader.jsx";
 import { Typography } from "@mui/material";
+import ErrorPage from "./ErrorPage.jsx";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const UserOrder = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [fetching, setFetching] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
+  const showToast = useToast();
 
   useEffect(() => {
     getOneOrder(id)
       .then((data) => setOrder(data))
-      .catch((error) => setError(error.response.data.message))
+      .catch((error) => {
+        setError(true);
+        showToast(error.response.data.message, "error");
+      })
       .finally(() => setFetching(false));
   }, [id]);
 
@@ -23,7 +29,7 @@ const UserOrder = () => {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <ErrorPage />;
   }
 
   return (

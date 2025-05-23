@@ -1,11 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../components/AppContext.jsx";
-import { fetchBasket } from "../http/basketAPI.js";
+import { fetchBasket } from "@/http/basketAPI.js";
 import { check as checkAuth } from "../http/userAPI.js";
 import { Navigate } from "react-router-dom";
 import Loader from "../components/Loader.jsx";
 import { Typography, Box, TextField, Button, Container } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const isValid = (input) => {
   let pattern;
@@ -30,6 +31,7 @@ const Checkout = () => {
   const { user, basket } = useContext(AppContext);
   const [fetching, setFetching] = useState(true);
   const [loading, setLoading] = useState(false);
+  const showToast = useToast();
 
   const [value, setValue] = useState({
     name: "",
@@ -54,7 +56,7 @@ const Checkout = () => {
           user.login(data);
         }
       })
-      .catch((error) => user.logout());
+      .catch(() => user.logout());
   }, [basket, user]);
 
   if (fetching) {
@@ -97,7 +99,7 @@ const Checkout = () => {
 
   const handlePayment = async () => {
     if (!valid.name || !valid.email || !valid.phone || !valid.address) {
-      alert("Заполните все поля корректно");
+      showToast("Заполните все поля корректно", "error");
       return;
     }
 
@@ -125,18 +127,21 @@ const Checkout = () => {
       const data = await response.json();
 
       if (!data.id) {
-        alert("Ошибка при создании платежа");
+        showToast("Ошибка при создании платежа", "error");
         return;
       }
 
-      const stripe = await loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
+      const stripe = await loadStripe(
+        import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY,
+      );
       const { error } = await stripe.redirectToCheckout({ sessionId: data.id });
 
       if (error) {
-        console.error("Ошибка при редиректе:", error);
+        showToast("Ошибка при создании платежа", "error");
       }
     } catch (error) {
-      console.error("Ошибка оплаты:", error);
+      showToast("Ошибка оплаты заказа", "error");
+      console.error(error);
     } finally {
       setLoading(false);
     }

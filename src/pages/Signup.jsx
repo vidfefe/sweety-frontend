@@ -11,10 +11,12 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const Signup = observer(() => {
   const { user } = useContext(AppContext);
   const navigate = useNavigate();
+  const showToast = useToast();
 
   useEffect(() => {
     if (user.isAdmin) navigate("/admin", { replace: true });
@@ -25,13 +27,18 @@ const Signup = observer(() => {
     event.preventDefault();
     const email = event.target.email.value.trim();
     const password = event.target.password.value.trim();
-    const data = await signup(email, password);
-    if (data) {
-      user.login(data);
+    const { user: userData, error } = await signup(email, password);
+
+    if (error) showToast(error, "error");
+
+    if (userData) {
+      user.login(userData);
       if (user.isAdmin) navigate("/admin");
       if (user.isAuth) navigate("/");
+      showToast("Вы успешно зарегистрировались", "success");
     }
   };
+
   return (
     <Container
       sx={{

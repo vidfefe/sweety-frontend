@@ -24,6 +24,7 @@ import {
   updateProperty,
   deleteProperty,
 } from "../http/catalogAPI.js";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const defaultValue = { name: "", price: "", category: "", brand: "" };
 const defaultValid = { name: null, price: null, category: null, brand: null };
@@ -42,13 +43,15 @@ const isValid = (value) => {
 };
 
 const updateProperties = async (properties, productId) => {
+  const showToast = useToast();
+
   for (const prop of properties) {
     const empty = prop.name.trim() === "" || prop.value.trim() === "";
     if (empty && prop.id) {
       try {
         await deleteProperty(productId, prop);
       } catch (error) {
-        alert(error.response.data.message);
+        showToast(error.response.data.message, "error");
       }
       continue;
     }
@@ -56,7 +59,7 @@ const updateProperties = async (properties, productId) => {
       try {
         await createProperty(productId, prop);
       } catch (error) {
-        alert(error.response.data.message);
+        showToast(error.response.data.message, "error");
       }
       continue;
     }
@@ -64,7 +67,7 @@ const updateProperties = async (properties, productId) => {
       try {
         await updateProperty(productId, prop.id, prop);
       } catch (error) {
-        alert(error.response.data.message);
+        showToast(error.response.data.message, "error");
       }
       continue;
     }
@@ -72,7 +75,7 @@ const updateProperties = async (properties, productId) => {
       try {
         await deleteProperty(productId, prop.id);
       } catch (error) {
-        alert(error.response.data.message);
+        showToast(error.response.data.message, "error");
       }
       continue;
     }
@@ -86,6 +89,7 @@ const UpdateProduct = ({ id, show, setShow, setChange }) => {
   const [brands, setBrands] = useState(null);
   const [image, setImage] = useState(null);
   const [properties, setProperties] = useState([]);
+  const showToast = useToast();
 
   useEffect(() => {
     if (id) {
@@ -109,7 +113,7 @@ const UpdateProduct = ({ id, show, setShow, setChange }) => {
             })),
           );
         })
-        .catch((error) => alert(error.response.data.message));
+        .catch((error) => showToast(error.response.data.message, "error"));
       fetchCategories().then(setCategories);
       fetchBrands().then(setBrands);
     }
@@ -160,10 +164,11 @@ const UpdateProduct = ({ id, show, setShow, setChange }) => {
               change: false,
             })),
           );
-          setShow(false); // ✅ Исправлено: теперь модальное окно закрывается после успешного обновления
-          setChange((prev) => !prev); // ✅ Исправлено: теперь список товаров обновляется
+          setShow(false);
+          setChange((prev) => !prev);
+          showToast("Товар успешно обновлен", "success");
         })
-        .catch((error) => alert(error.response.data.message));
+        .catch((error) => showToast(error.response.data.message, "error"));
     }
   };
 

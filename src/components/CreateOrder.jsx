@@ -1,23 +1,28 @@
+import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 
 const CreateOrder = (props) => {
   const { show, setShow } = props;
   return (
-    <Modal show={show} onHide={() => setShow(false)}>
-      <Modal.Header closeButton>
-        <Modal.Title>Новый заказ</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        <p>Форма для создания заказа</p>
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button variant="secondary" onClick={() => setShow(false)}>
-          Закрыть
+    <Dialog open={show} onClose={() => setShow(false)} maxWidth="md" fullWidth>
+      <DialogTitle>Новый заказ</DialogTitle>
+      <DialogActions>
+        <Button
+          sx={{ py: "10px" }}
+          onClick={() => setShow(false)}
+          color="secondary"
+        >
+          Отмена
         </Button>
-        <Button variant="primary">Сохранить</Button>
-      </Modal.Footer>
-    </Modal>
+        <Button
+          sx={{ py: "10px" }}
+          type="submit"
+          color="primary"
+          variant="contained"
+        >
+          Сохранить
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

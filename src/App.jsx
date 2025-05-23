@@ -36,7 +36,7 @@ const App = observer(() => {
     <Container maxWidth="xl" sx={{ marginBottom: 2 }}>
       <BrowserRouter>
         <NavBar />
-        <Divider />
+        <Divider sx={{ marginBottom: 2 }} />
         <AppRouter />
       </BrowserRouter>
     </Container>

@@ -1,10 +1,5 @@
 import { Button, TextField, IconButton, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-// import {
-//   createProperty,
-//   updateProperty,
-//   deleteProperty,
-// } from "../http/catalogAPI.js";
 import { Delete } from "@mui/icons-material";
 import uuid from "react-uuid";
 

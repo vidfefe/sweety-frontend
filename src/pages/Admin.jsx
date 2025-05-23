@@ -17,7 +17,7 @@ const Admin = () => {
   const { user } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     logout();
     user.logout();
     navigate("/login", { replace: true });
@@ -42,6 +42,9 @@ const Admin = () => {
         <ListItem component={Link} to="/admin/products">
           <ListItemText primary="Товары" />
         </ListItem>
+        {/* <ListItem component={Link} to="/admin/orders">
+          <ListItemText primary="Заказы клиентов" />
+        </ListItem> */}
       </List>
 
       <Button
@@ -54,7 +57,6 @@ const Admin = () => {
         Выйти
       </Button>
     </Box>
-    //     {/* <li><Link to="/admin/orders">Заказы в магазине</Link></li> */}
   );
 };
 

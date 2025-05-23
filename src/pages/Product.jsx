@@ -20,12 +20,14 @@ import {
   Rating,
   TableRow,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const Product = () => {
   const { id } = useParams();
   const { basket } = useContext(AppContext);
   const [product, setProduct] = useState(null);
   const [userRating, setUserRating] = useState(null);
+  const showToast = useToast();
 
   useEffect(() => {
     fetchOneProduct(id).then((data) => setProduct(data));
@@ -45,6 +47,7 @@ const Product = () => {
 
       basket.products = updatedProducts;
     });
+    showToast("Товар добавлен в корзину", "success");
   };
 
   const handleRatingChange = (newValue) => {
@@ -57,7 +60,7 @@ const Product = () => {
         }));
       })
       .catch(() => {
-        alert("Ошибка при сохранении рейтинга");
+        showToast("Ошибка при сохранении рейтинга", "error");
       });
   };
 
@@ -90,7 +93,7 @@ const Product = () => {
           ) : (
             <img
               width={300}
-              src="https://placehold.co/300x300"
+              src="https://placehold.co/300x300/purple/white"
               alt="Placeholder"
             />
           )}
@@ -109,15 +112,17 @@ const Product = () => {
               <Grid display="flex" alignItems="center" justifyContent="center">
                 <Typography variant="body2" ml={2}>
                   Средний рейтинг:{" "}
-                  {product.rating ? product.rating : "Нет оценок"}
+                  {product.rating
+                    ? Number(product.rating).toFixed(1)
+                    : "Нет оценок"}
                 </Typography>
                 <Typography variant="body2" ml={2}>
                   Вы поставили:
                 </Typography>
                 <Rating
                   name="user-rating"
-                  value={Number(userRating) || 0}
-                  onChange={(event, newValue) => handleRatingChange(newValue)}
+                  value={userRating || 0}
+                  onChange={(_, newValue) => handleRatingChange(newValue)}
                   size="large"
                 />
               </Grid>

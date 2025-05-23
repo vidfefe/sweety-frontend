@@ -12,10 +12,12 @@ import {
   updateCategory,
 } from "../http/catalogAPI.js";
 import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const EditCategory = ({ id, show, setShow, setChange }) => {
   const [name, setName] = useState("");
   const [valid, setValid] = useState(null);
+  const showToast = useToast();
 
   useEffect(() => {
     if (id) {
@@ -24,7 +26,7 @@ const EditCategory = ({ id, show, setShow, setChange }) => {
           setName(data.name);
           setValid(data.name !== "");
         })
-        .catch((error) => alert(error.response.data.message));
+        .catch((error) => showToast(error.response.data.message, "error"));
     } else {
       setName("");
       setValid(null);
@@ -44,11 +46,11 @@ const EditCategory = ({ id, show, setShow, setChange }) => {
       const data = {
         name: name.trim(),
       };
-      const success = (data) => {
+      const success = () => {
         setShow(false);
         setChange((state) => !state);
       };
-      const error = (error) => alert(error.response.data.message);
+      const error = (error) => showToast(error.response.data.message, "error");
       id
         ? updateCategory(id, data).then(success).catch(error)
         : createCategory(data).then(success).catch(error);

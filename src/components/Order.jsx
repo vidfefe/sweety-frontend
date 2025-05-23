@@ -24,7 +24,7 @@ const Order = ({ data }) => {
         <ListItem>
           <ListItemText>{`Статус заказа: ${
             data.status === 0
-              ? "Новый"
+              ? "Оформлен"
               : data.status === 1
                 ? "В пути"
                 : "Доставлен"

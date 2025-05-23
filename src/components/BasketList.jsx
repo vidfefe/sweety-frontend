@@ -17,11 +17,13 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const BasketList = observer(() => {
   const { basket } = useContext(AppContext);
   const [fetching, setFetching] = useState(false);
   let shipping = basket.sum * 0.2;
+  const showToast = useToast();
 
   const navigate = useNavigate();
 
@@ -29,6 +31,10 @@ const BasketList = observer(() => {
     setFetching(true);
     increment(id)
       .then((data) => (basket.products = data.products))
+      .catch((error) => {
+        console.error(error);
+        showToast("Ошибка при добавлении товара", "error");
+      })
       .finally(() => setFetching(false));
   };
 
@@ -36,6 +42,10 @@ const BasketList = observer(() => {
     setFetching(true);
     decrement(id)
       .then((data) => (basket.products = data.products))
+      .catch((error) => {
+        console.error(error);
+        showToast("Ошибка при добавлении товара", "error");
+      })
       .finally(() => setFetching(false));
   };
 
@@ -43,6 +53,10 @@ const BasketList = observer(() => {
     setFetching(true);
     remove(id)
       .then((data) => (basket.products = data.products))
+      .catch((error) => {
+        console.error(error);
+        showToast("Ошибка при добавлении товара", "error");
+      })
       .finally(() => setFetching(false));
   };
 

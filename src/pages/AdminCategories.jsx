@@ -14,6 +14,7 @@ import {
   TableHead,
   TableBody,
 } from "@mui/material";
+import { useToast } from "@/hooks/useToast.jsx";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState(null);
@@ -21,6 +22,7 @@ const AdminCategories = () => {
   const [show, setShow] = useState(false);
   const [change, setChange] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
+  const showToast = useToast();
 
   const handleCreateClick = () => {
     setCategoryId(0);
@@ -36,14 +38,15 @@ const AdminCategories = () => {
     deleteCategory(id)
       .then((data) => {
         setChange(!change);
-        alert(`Категория «${data.name}» удалена`);
+        showToast(`Категория «${data.name}» удалена`, "warning");
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) => showToast(error.response.data.message, "error"));
   };
 
   useEffect(() => {
     fetchCategories()
       .then((data) => setCategories(data))
+      .catch((error) => showToast(error.response.data.message, "error"))
       .finally(() => setFetching(false));
   }, [change]);
 

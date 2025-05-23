@@ -78,12 +78,10 @@ export const fetchAllProducts = async (
   limit = 3,
 ) => {
   let url = "product/getall";
-  // фильтрация товаров по категории и/или бренду
   if (categoryId) url = url + "/categoryId/" + categoryId;
   if (brandId) url = url + "/brandId/" + brandId;
   const { data } = await guestInstance.get(url, {
     params: {
-      // GET-параметры для постраничной навигации
       page,
       limit,
     },
