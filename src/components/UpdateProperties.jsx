@@ -23,9 +23,10 @@ const UpdateProperties = (props) => {
         ),
       );
     } else {
-      setProperties(properties.filter((elem) => elem.unique === unique));
+      setProperties(properties.filter((elem) => elem.unique !== unique));
     }
   };
+
   const change = (key, value, unique) => {
     setProperties(
       properties.map((item) =>
@@ -59,7 +60,7 @@ const UpdateProperties = (props) => {
           key={item.unique}
           sx={{ marginBottom: 2, display: item.remove ? "none" : "flex" }}
         >
-          <Grid item xs={4}>
+          <Grid xs={4}>
             <TextField
               fullWidth
               name={"name_" + item.unique}
@@ -69,7 +70,7 @@ const UpdateProperties = (props) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid xs={4}>
             <TextField
               fullWidth
               name={"value_" + item.unique}
@@ -79,7 +80,7 @@ const UpdateProperties = (props) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid xs={4}>
             <IconButton onClick={() => remove(item.unique)} size="small">
               <Delete />
             </IconButton>

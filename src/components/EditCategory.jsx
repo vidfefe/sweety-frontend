@@ -20,18 +20,23 @@ const EditCategory = ({ id, show, setShow, setChange }) => {
   const showToast = useToast();
 
   useEffect(() => {
-    if (id) {
-      fetchCategory(id)
-        .then((data) => {
-          setName(data.name);
-          setValid(data.name !== "");
-        })
-        .catch((error) => showToast(error.response.data.message, "error"));
-    } else {
-      setName("");
-      setValid(null);
+    if (show) {
+      if (id) {
+        fetchCategory(id)
+          .then((data) => {
+            setName(data.name);
+            setValid(data.name !== "");
+          })
+          .catch((error) => {
+            console.error(error.response.data.message);
+            showToast("Ошибка при загрузке категории", "error");
+          });
+      } else {
+        setName("");
+        setValid(null);
+      }
     }
-  }, [id]);
+  }, [id, show]);
 
   const handleChange = (event) => {
     setName(event.target.value);
@@ -49,8 +54,18 @@ const EditCategory = ({ id, show, setShow, setChange }) => {
       const success = () => {
         setShow(false);
         setChange((state) => !state);
+        showToast(
+          `Категория успешно ${id ? "обновлена" : "добавлена"}`,
+          "success",
+        );
       };
-      const error = (error) => showToast(error.response.data.message, "error");
+      const error = (error) => {
+        showToast(
+          `Ошибка при ${id ? "обновлении" : "добавлении"} категории`,
+          "error",
+        );
+        console.error(error.response.data.message);
+      };
       id
         ? updateCategory(id, data).then(success).catch(error)
         : createCategory(data).then(success).catch(error);

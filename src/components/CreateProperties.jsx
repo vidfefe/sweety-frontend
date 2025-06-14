@@ -1,11 +1,13 @@
 import { Button, TextField, IconButton, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Delete } from "@mui/icons-material";
+import uuid from "react-uuid";
+
 const CreateProperties = (props) => {
   const { properties, setProperties } = props;
 
   const append = () => {
-    setProperties([...properties, { name: "", value: "", number: Date.now() }]);
+    setProperties([...properties, { name: "", value: "", number: uuid() }]);
   };
   const remove = (number) => {
     setProperties(properties.filter((item) => item.number !== number));

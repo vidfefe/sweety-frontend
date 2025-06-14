@@ -8,6 +8,7 @@ import {
   TextField,
   FormHelperText,
 } from "@mui/material";
+import uuid from "react-uuid";
 import {
   createProduct,
   fetchCategories,
@@ -21,6 +22,16 @@ import { useToast } from "@/hooks/useToast.jsx";
 
 const defaultValue = { name: "", price: "", category: "", brand: "" };
 const defaultValid = { name: null, price: null, category: null, brand: null };
+const DEFAULT_PROPERTIES = [
+  "Срок годности",
+  "Количество",
+  "Вес за 1 шт",
+  "Энергетическая ценность (ккал): в 1 порции",
+  "Углеводы: в 1 порции",
+  "Жиры: в 1 порции",
+  "Белок: в 1 порции",
+  "Состав",
+];
 
 const isValid = (value) => {
   const result = {};
@@ -45,9 +56,19 @@ const CreateProduct = ({ show, setShow, setChange }) => {
   const showToast = useToast();
 
   useEffect(() => {
-    fetchCategories().then((data) => setCategories(data));
-    fetchBrands().then((data) => setBrands(data));
-  }, []);
+    if (show) {
+      fetchCategories().then((data) => setCategories(data));
+      fetchBrands().then((data) => setBrands(data));
+      setProperties(
+        DEFAULT_PROPERTIES.map((name) => ({
+          id: null,
+          name,
+          value: "",
+          number: uuid(),
+        })),
+      );
+    }
+  }, [show]);
 
   const handleInputChange = (event) => {
     const data = { ...value, [event.target.name]: event.target.value };

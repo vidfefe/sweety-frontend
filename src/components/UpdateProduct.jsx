@@ -42,9 +42,7 @@ const isValid = (value) => {
   return result;
 };
 
-const updateProperties = async (properties, productId) => {
-  const showToast = useToast();
-
+const updateProperties = async (properties, productId, showToast) => {
   for (const prop of properties) {
     const empty = prop.name.trim() === "" || prop.value.trim() === "";
     if (empty && prop.id) {
@@ -143,7 +141,7 @@ const UpdateProduct = ({ id, show, setShow, setChange }) => {
       if (image) data.append("image", image, image.name);
 
       if (properties.length) {
-        await updateProperties(properties, id);
+        await updateProperties(properties, id, showToast);
       }
 
       updateProduct(id, data)

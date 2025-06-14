@@ -16,21 +16,23 @@ const EditBrand = ({ id, show, setShow, setChange }) => {
   const showToast = useToast();
 
   useEffect(() => {
-    if (id) {
-      fetchBrand(id)
-        .then((data) => {
-          setName(data.name);
-          setValid(data.name !== "");
-        })
-        .catch((error) => {
-          console.error(error.response.data.message);
-          showToast("Ошибка при загрузке бренда", "error");
-        });
-    } else {
-      setName("");
-      setValid(null);
+    if (show) {
+      if (id) {
+        fetchBrand(id)
+          .then((data) => {
+            setName(data.name);
+            setValid(data.name !== "");
+          })
+          .catch((error) => {
+            console.error(error.response.data.message);
+            showToast("Ошибка при загрузке бренда", "error");
+          });
+      } else {
+        setName("");
+        setValid(null);
+      }
     }
-  }, [id]);
+  }, [show, id]);
 
   const handleChange = (event) => {
     setName(event.target.value);
