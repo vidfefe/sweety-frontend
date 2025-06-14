@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { useToast } from "@/hooks/useToast.jsx";
 
-const ADMIN_PER_PAGE = 12;
+const ADMIN_PER_PAGE = 10;
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
@@ -152,6 +152,8 @@ const AdminProducts = () => {
           </Table>
           {totalPages > 1 && (
             <Pagination
+              color="primary"
+              size="large"
               count={totalPages}
               page={currentPage}
               onChange={handlePageChange}
