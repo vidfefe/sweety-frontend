@@ -112,7 +112,12 @@ const Shop = observer(() => {
         <Loader />
       ) : (
         <Grid2 container mt={2} spacing={2}>
-          <Grid2 size={{ md: 3 }}>
+          <Grid2
+            size={{ xs: 12, sm: 7, md: 3 }}
+            sx={{
+              mx: "auto",
+            }}
+          >
             <FilterAccordion />
           </Grid2>
           <Grid2 size={{ md: 9 }}>

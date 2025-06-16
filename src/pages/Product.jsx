@@ -79,7 +79,11 @@ const Product = () => {
         container
         spacing={2}
       >
-        <Grid>
+        <Grid
+          sx={{
+            mx: { xs: "auto", md: 0 },
+          }}
+        >
           {product.image ? (
             <img
               style={{
@@ -99,34 +103,53 @@ const Product = () => {
           )}
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 8 }}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <Box>
             <Typography variant="h4" gutterBottom>
               {product.name}
             </Typography>
 
-            <Grid container spacing={2}>
-              <Grid>
-                <Typography variant="h5">{product.price} BYN</Typography>
-              </Grid>
-              <Grid display="flex" alignItems="center" justifyContent="center">
-                <Typography variant="body2" ml={2}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                alignItems: { xs: "flex-start", md: "center" },
+                gap: { xs: 1, md: 2 },
+              }}
+            >
+              <Typography variant="h5">{product.price} BYN</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 2,
+                }}
+              >
+                <Typography variant="body2">
                   Средний рейтинг:{" "}
                   {product.rating
                     ? Number(product.rating).toFixed(1)
                     : "Нет оценок"}
                 </Typography>
-                <Typography variant="body2" ml={2}>
-                  Вы поставили:
-                </Typography>
-                <Rating
-                  name="user-rating"
-                  value={userRating || 0}
-                  onChange={(_, newValue) => handleRatingChange(newValue)}
-                  size="large"
-                />
-              </Grid>
-            </Grid>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 1,
+                  }}
+                >
+                  <Typography variant="body2">Вы поставили:</Typography>
+                  <Rating
+                    name="user-rating"
+                    value={userRating || 0}
+                    onChange={(_, newValue) => handleRatingChange(newValue)}
+                    size="large"
+                  />
+                </Box>
+              </Box>
+            </Box>
           </Box>
 
           <Button
@@ -134,13 +157,14 @@ const Product = () => {
             color="primary"
             sx={{
               py: "16px",
+              my: 1,
             }}
             onClick={() => handleClick(product.id)}
           >
             Добавить в корзину
           </Button>
 
-          <Box mt={2}>
+          <Box>
             <Typography variant="body2" color="textSecondary" gutterBottom>
               Бренд: {product.brand.name}
             </Typography>
@@ -153,7 +177,7 @@ const Product = () => {
 
       {!!product.props.length && (
         <Grid container spacing={3} mt={5}>
-          <Grid size={{ xs: 12, sm: 7 }}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <Typography variant="h5">Характеристики</Typography>
             <Table size="small">
               <TableBody>
@@ -174,7 +198,7 @@ const Product = () => {
             </Table>
           </Grid>
 
-          <Grid size={{ xs: 12, sm: 5 }}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <Typography variant="h5" gutterBottom>
               Состав
             </Typography>

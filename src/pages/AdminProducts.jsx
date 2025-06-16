@@ -19,6 +19,7 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  Box,
 } from "@mui/material";
 import { useToast } from "@/hooks/useToast.jsx";
 
@@ -103,53 +104,55 @@ const AdminProducts = () => {
       />
       {products.length > 0 ? (
         <>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Название</TableCell>
-                <TableCell>Фото</TableCell>
-                <TableCell>Категория</TableCell>
-                <TableCell>Бренд</TableCell>
-                <TableCell>Цена</TableCell>
-                <TableCell>Редактировать</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>
-                    {item.image && (
-                      <IconButton
-                        component="a"
-                        href={item.image}
-                        target="_blank"
-                      >
-                        <InsertPhotoOutlined />
-                      </IconButton>
-                    )}
-                  </TableCell>
-                  <TableCell>{item.category?.name || "Null"}</TableCell>
-                  <TableCell>{item.brand?.name || "Null"}</TableCell>
-                  <TableCell>{item.price} BYN</TableCell>
-                  <TableCell>
-                    <IconButton
-                      color="primary"
-                      onClick={() => handleUpdateClick(item.id)}
-                    >
-                      <EditOutlined />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => handleDeleteClick(item.id)}>
-                      <Delete />
-                    </IconButton>
-                  </TableCell>
+          <Box sx={{ overflowX: "auto", width: "100%" }}>
+            <Table size="small" sx={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Название</TableCell>
+                  <TableCell>Фото</TableCell>
+                  <TableCell>Категория</TableCell>
+                  <TableCell>Бренд</TableCell>
+                  <TableCell>Цена</TableCell>
+                  <TableCell>Редактировать</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {products.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>
+                      {item.image && (
+                        <IconButton
+                          component="a"
+                          href={item.image}
+                          target="_blank"
+                        >
+                          <InsertPhotoOutlined />
+                        </IconButton>
+                      )}
+                    </TableCell>
+                    <TableCell>{item.category?.name || "Null"}</TableCell>
+                    <TableCell>{item.brand?.name || "Null"}</TableCell>
+                    <TableCell>{item.price} BYN</TableCell>
+                    <TableCell>
+                      <IconButton
+                        color="primary"
+                        onClick={() => handleUpdateClick(item.id)}
+                      >
+                        <EditOutlined />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton onClick={() => handleDeleteClick(item.id)}>
+                        <Delete />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
           {totalPages > 1 && (
             <Pagination
               color="primary"

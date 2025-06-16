@@ -68,32 +68,34 @@ const BasketList = observer(() => {
     <>
       {basket.count ? (
         <Grid container spacing={4}>
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Изображение</TableCell>
-                  <TableCell>Наименование</TableCell>
-                  <TableCell>Цена</TableCell>
-                  <TableCell>Количество</TableCell>
-                  <TableCell>Сумма</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {basket.products.map((item) => (
-                  <BasketItem
-                    key={item.id}
-                    increment={handleIncrement}
-                    decrement={handleDecrement}
-                    remove={handleRemove}
-                    {...item}
-                  />
-                ))}
-              </TableBody>
-            </Table>
+          <Grid size={{ xs: 12, md: 8, lg: 7 }}>
+            <Box sx={{ overflowX: "auto", width: "100%" }}>
+              <Table size="small" sx={{ minWidth: 600 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Изображение</TableCell>
+                    <TableCell>Наименование</TableCell>
+                    <TableCell>Цена</TableCell>
+                    <TableCell>Количество</TableCell>
+                    <TableCell>Сумма</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {basket.products.map((item) => (
+                    <BasketItem
+                      key={item.id}
+                      increment={handleIncrement}
+                      decrement={handleDecrement}
+                      remove={handleRemove}
+                      {...item}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, md: 5 }}>
+          <Grid size={{ xs: 12, md: 4, lg: 5 }}>
             <Table size="small">
               <TableHead>
                 <TableRow>

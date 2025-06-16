@@ -7,7 +7,8 @@ body {
   background-color: #ffffff;
 }
 
-a {
+a,
+.burger-button {
   text-decoration: none;
   color: #9c27b0;
 
@@ -17,12 +18,12 @@ a {
   }
 }
 
-.login-button:hover, .basket-empty:hover {
+.login-button:hover,
+.basket-empty:hover {
   p {
     color: #fff !important;
   }
 }
-
 
 .login-button svg,
 .logout-button svg {

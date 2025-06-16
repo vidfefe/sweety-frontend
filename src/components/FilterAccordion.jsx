@@ -41,7 +41,7 @@ const FilterAccordion = observer(() => {
 
   return (
     <Box>
-      <Accordion>
+      <Accordion id="categories">
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography component="h6">Категории</Typography>
         </AccordionSummary>
@@ -60,7 +60,7 @@ const FilterAccordion = observer(() => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      <Accordion id="categories">
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography component="h6">Бренды</Typography>
         </AccordionSummary>

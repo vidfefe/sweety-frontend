@@ -10,6 +10,7 @@ import {
   TableBody,
   TableRow,
 } from "@mui/material";
+import { formatDate } from "../utils/formatDate";
 
 const Order = ({ data }) => {
   return (
@@ -19,7 +20,9 @@ const Order = ({ data }) => {
       </Typography>
       <List>
         <ListItem>
-          <ListItemText>{`Дата заказа: ${data.prettyCreatedAt}`} </ListItemText>
+          <ListItemText>
+            {`Дата заказа: ${formatDate(data.createdAt)}`}{" "}
+          </ListItemText>
         </ListItem>
         <ListItem>
           <ListItemText>{`Статус заказа: ${
@@ -46,35 +49,38 @@ const Order = ({ data }) => {
           <ListItemText>{`Комментарий: ${data.comment || "Отсутствует"}`}</ListItemText>
         </ListItem>
       </List>
-
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Название</TableCell>
-            <TableCell>Цена</TableCell>
-            <TableCell>Количество</TableCell>
-            <TableCell>Сумма</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.items.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.price} BYN</TableCell>
-              <TableCell>{item.quantity}</TableCell>
-              <TableCell>
-                {(item.price * item.quantity).toFixed(2)} BYN
+      <Box sx={{ overflowX: "auto", width: "100%" }}>
+        <Table size="small" sx={{ minWidth: 350 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Название</TableCell>
+              <TableCell>Цена</TableCell>
+              <TableCell>Количество</TableCell>
+              <TableCell>Сумма</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.items.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.price} BYN</TableCell>
+                <TableCell>{item.quantity}</TableCell>
+                <TableCell>
+                  {(item.price * item.quantity).toFixed(2)} BYN
+                </TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell colSpan={3} sx={{ fontWeight: "bold" }}>
+                Итого
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>
+                {data.amount} BYN
               </TableCell>
             </TableRow>
-          ))}
-          <TableRow>
-            <TableCell colSpan={3} sx={{ fontWeight: "bold" }}>
-              Итого
-            </TableCell>
-            <TableCell sx={{ fontWeight: "bold" }}>{data.amount} BYN</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      </Box>
     </Box>
   );
 };

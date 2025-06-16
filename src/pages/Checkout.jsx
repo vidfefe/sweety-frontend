@@ -68,35 +68,6 @@ const Checkout = () => {
     setValid({ ...valid, [event.target.name]: isValid(event.target) });
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   setValue({
-  //     name: event.target.name.value.trim(),
-  //     email: event.target.email.value.trim(),
-  //     phone: event.target.phone.value.trim(),
-  //     address: event.target.address.value.trim(),
-  //   });
-
-  //   setValid({
-  //     name: isValid(event.target.name),
-  //     email: isValid(event.target.email),
-  //     phone: isValid(event.target.phone),
-  //     address: isValid(event.target.address),
-  //   });
-
-  //   if (valid.name && valid.email && valid.phone && valid.address) {
-  //     let comment = event.target.comment.value.trim();
-  //     comment = comment ? comment : null;
-  //     const body = { ...value, comment };
-  //     const create = user.isAuth ? userCreate : guestCreate;
-  //     create(body).then((data) => {
-  //       setOrder(data);
-  //       basket.products = [];
-  //     });
-  //   }
-  // };
-
   const handlePayment = async () => {
     if (!valid.name || !valid.email || !valid.phone || !valid.address) {
       showToast("Заполните все поля корректно", "error");
