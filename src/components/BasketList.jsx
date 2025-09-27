@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./AppContext.jsx";
 import { increment, decrement, remove } from "../http/basketAPI.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BasketItem from "./BasketItem.jsx";
 import { observer } from "mobx-react-lite";
 import Loader from "./Loader.jsx";
@@ -25,7 +25,7 @@ const BasketList = observer(() => {
   let shipping = basket.sum * 0.2;
   const showToast = useToast();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleIncrement = (id) => {
     setFetching(true);
@@ -119,10 +119,11 @@ const BasketList = observer(() => {
             </Table>
 
             <Button
+              component={Link}
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("/checkout")}
+              to="/checkout"
               sx={{ mt: 2, py: "16px" }}
             >
               Оформить заказ

@@ -47,16 +47,22 @@ const Checkout = () => {
   });
 
   useEffect(() => {
-    fetchBasket()
-      .then((data) => (basket.products = data.products))
-      .finally(() => setFetching(false));
     checkAuth()
       .then((data) => {
         if (data) {
           user.login(data);
         }
       })
-      .catch(() => user.logout());
+      .catch(() => showToast("Что-то пошло не так...", "error"));
+
+    fetchBasket()
+      .then((data) => {
+        if (Array.isArray(data?.products && data.products.length > 0)) {
+          basket.products = data.products;
+        }
+      })
+      .catch(() => showToast("Ошибка получения корзины", "error"))
+      .finally(() => setFetching(false));
   }, [basket, user]);
 
   if (fetching) {
@@ -118,6 +124,10 @@ const Checkout = () => {
     }
   };
 
+  if (!fetching && basket.count === 0) {
+    return <Navigate to="/basket" replace />;
+  }
+
   return (
     <Container
       sx={{
@@ -127,7 +137,6 @@ const Checkout = () => {
         alignItems: "center",
       }}
     >
-      {basket.count === 0 && <Navigate to="/basket" replace />}
       <Typography variant="h4" gutterBottom>
         Оформление заказа
       </Typography>
